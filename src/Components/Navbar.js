@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import Logo from "../Assets/logoipsum-349.svg";
+import Logo from "../Assets/logoipsum-344.svg";
 import { BsCart2 } from "react-icons/bs";
 import { HiOutlineBars3 } from "react-icons/hi2";
-import { AddBox, DrawRounded } from "@mui/icons-material";
+import { Drawer, ListItemText } from "@mui/material";
+import { Box } from "@mui/material";
 import { List } from "@mui/material";
 import { ListItemButton } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
@@ -21,26 +22,27 @@ const Navbar = () => {
       icon: <Home />,
     },
     {
-      text: "Home",
+      text: "About",
       icon: <Info />,
     },
     {
-      text: "Home",
+      text: "Testimonials",
       icon: <CommentRounded />,
     },
     {
-      text: "Home",
+      text: "Contact",
       icon: <PhoneRounded />,
     },
     {
-      text: "Home",
+      text: "Cart",
       icon: <ShoppingCartRounded />,
     },
   ];
+
   return (
     <nav>
       <div className="nav-logo-container">
-        <img src={Logo} alt="protologo" />
+        <img src={Logo} alt="protologo" style={{ marginTop: "10px" }} />
       </div>
       <div className="navbar-links-container">
         <a href="">Home</a>
@@ -50,21 +52,14 @@ const Navbar = () => {
         <a href="">
           <BsCart2 className="navbar-cart-icon" />
         </a>
-        <button className="primary-button">Bookings Now</button>
+        <button className="primary-button">Book Now</button>
       </div>
       <div className="navbar-menu-container">
-        <HiOutlineBars3
-          open={openMenu}
-          onClose={() => setOpenMenu(false)}
-          anchor="right"
-        />
+        <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
       </div>
-      <DrawRounded
-        open={openMenu}
-        onClose={() => setOpenMenu(false)}
-        anchor="right"
-      >
-        <AddBox
+      <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
+        <Box
+          component="section"
           sx={{ width: 250 }}
           role="presentation"
           onClick={() => setOpenMenu(false)}
@@ -75,12 +70,13 @@ const Navbar = () => {
               <ListItem key={item.text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
-        </AddBox>
-      </DrawRounded>
+        </Box>
+      </Drawer>
     </nav>
   );
 };
